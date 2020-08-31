@@ -1,9 +1,14 @@
+require('dotenv').config({  
+  path: process.env.NODE_ENV === "test" ? ".env.testing" : ".env"
+});
+
 module.exports = {
-  host: '127.0.0.1',
-  username: 'root',
-  password: 'kvw%xtm?!4279596',
-  database: 'usuarios',
-  dialect: 'mysql',
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  dialect: process.env.DB_DIALECT || 'mysql',
+  storage: './__tests__/database.sqlite', //utilizar como padrão a raiz do projeto
   define: {
     timestamps: true,
     underscored: true, //aplicação de nome com underscore e não camelcase
